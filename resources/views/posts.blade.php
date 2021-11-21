@@ -9,23 +9,11 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-    <article>
-        <h1><a href="posts/my-first-post">My First Post</a></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eligendi et officiis perspiciatis porro
-           quibusdam quod tenetur voluptates. Deleniti doloribus excepturi hic, illo laudantium provident quaerat
-           quibusdam veritatis. Alias, perspiciatis?</p>
-    </article>
-    <article>
-        <h1><a href="posts/my-second-post">My Second Post</a></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eligendi et officiis perspiciatis porro
-           quibusdam quod tenetur voluptates. Deleniti doloribus excepturi hic, illo laudantium provident quaerat
-           quibusdam veritatis. Alias, perspiciatis?</p>
-    </article>
-    <article>
-        <h1><a href="posts/my-third-post">My Third Post</a></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eligendi et officiis perspiciatis porro
-           quibusdam quod tenetur voluptates. Deleniti doloribus excepturi hic, illo laudantium provident quaerat
-           quibusdam veritatis. Alias, perspiciatis?</p>
-    </article>
+    @foreach ($posts as $post)
+        <article>
+            {!! $post !!}
+        </article>
+    @endforeach
+
 </body>
 </html>
