@@ -30,24 +30,17 @@
             return $posts->firstWhere('slug', $slug);
         }
 
-        public static function all(): \Illuminate\Support\Collection {
-            return collect(File::files(resource_path("/posts/")))->map(function ($file) {
+        /**
+         * @throws \Exception
+         */
+        public static function all() {
+            return cache()->rememberForever('posts.all', function () {
+                return collect(File::files(resource_path("/posts/")))->map(function ($file) {
                     return YamlFrontMatter::parseFile($file);
                 })->map(function ($document) {
                     return new Post($document->title, $document->excerpt, $document->slug, $document->date, $document->body());
-                });
-            /*$posts = [];
-
-            return array_map(function($file){
-                $document = YamlFrontMatter::parseFile($file);
-                return $posts = new Post(
-                    $document->title,
-                    $document->excerpt,
-                    $document->slug,
-                    $document->date,
-                    $document->body()
-                );
-            },$files);*/
+                })->sortByDesc('date');
+            });
         }
 
     }
