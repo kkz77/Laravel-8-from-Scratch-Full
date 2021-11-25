@@ -26,8 +26,16 @@
          * @throws \Exception
          */
         public static function find($slug) {
-            $posts = static::all();
-            return $posts->firstWhere('slug', $slug);
+            $post = static::all();
+            return $post->firstWhere('slug', $slug);
+        }
+
+        public static function findOrFail($slug){
+            $post = static::find($slug);
+            if(!$post){
+                throw new ModelNotFoundException();
+            }
+            return $post;
         }
 
         /**
