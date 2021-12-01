@@ -10,13 +10,13 @@
     });
 
     Route::get('posts/{post:slug}', function (Post $post) {
-        return view('post', ['post' => $post]);
+        return view('post', ['post' => $post->load(['category','author'])]);
     });
 
     Route::get('categories/{category:slug}', function (Category $category) {
-        return view('posts', ['posts' => $category->posts]);
+        return view('posts', ['posts' => $category->posts->load(['category','author'])]);
     });
 
     Route::get('authors/{author:username}', function (User $author) {
-        return view('posts', ['posts' => $author->posts]);
+        return view('posts', ['posts' => $author->posts->load(['category','author'])]);
     });
