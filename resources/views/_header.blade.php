@@ -14,34 +14,23 @@
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
-            <div id="app" class="flex-1 flex flex-col relative text-sm">
-                <button @click="open = !open"
-                        class="flex font-semibold appearance-none bg-transparent py-2 pl-3 pr-9 text-sm text-left">
-                    {{isset($currentCategory)? $currentCategory->name: 'Categories'}}
-                    <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
-                         height="22" viewBox="0 0 22 22">
-                        <g fill="none" fill-rule="evenodd">
-                            <path stroke="#000" stroke-opacity=".012" stroke-width=".5" d="M21 1v20.16H.84V1z">
-                            </path>
-                            <path fill="#222"
-                                  d="M13.854 7.224l-3.847 3.856 3.847 3.856-1.184 1.184-5.04-5.04 5.04-5.04z"></path>
-                        </g>
-                    </svg>
-                </button>
-                <div v-show="open"
-                     class="flex flex-col space-y-4 text-center px-2 py-2 absolute w-full bg-transparent mt-10 bg-gray-100 rounded-xl z-50">
-                    <a href="/" @click="open = !open"
-                       class="hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white text-left px-2"
-                    >All</a>
-                    @foreach($categories as $category)
-                        <a href="/categories/{{$category->slug}}" @click="open = !open"
-                           class="
-                           {{isset($currentCategory)?($currentCategory->id === $category->id)? 'bg-blue-500 text-white':'':''}}
-                               hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white text-left px-2"
-                        >{{$category->name}}</a>
-                    @endforeach
-                </div>
-            </div>
+            <x-dropdown>
+                <x-slot name="trigger">
+                    <button @click="open = !open"
+                            class="flex font-semibold appearance-none bg-transparent py-2 pl-3 pr-9 text-sm text-left">
+                        {{isset($currentCategory)? $currentCategory->name: 'Categories'}}
+                        <x-icon name="dropdown"></x-icon>
+                    </button>
+                </x-slot>
+                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
+                @foreach($categories as $category)
+                    <x-dropdown-item href="/categories/{{$category->slug}}"
+                    {{--isset($currentCategory)&& $currentCategory->is($category)--}}
+                                     :active="request()->is('categories/'.$category->slug)">
+                                    {{$category->name}}
+                    </x-dropdown-item>
+                @endforeach
+            </x-dropdown>
         </div>
 
         <!-- Other Filters -->
@@ -75,11 +64,3 @@
         </div>
     </div>
 </header>
-<script>
-    new Vue({
-        el: '#app',
-        data: {
-            open: false,
-        },
-    })
-</script>
