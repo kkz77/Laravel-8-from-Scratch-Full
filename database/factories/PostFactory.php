@@ -17,10 +17,10 @@ class PostFactory extends Factory
     {
         return [
            'user_id' => $this->faker->numberBetween(1,3),
-            'category_id'=> $this->faker->numberBetween(1,5),
+            'category_id'=> $this->faker->numberBetween(1,10),
             'title' => $this->faker->sentence,
             'slug'=> $this->faker->unique->slug,
-            'excerpt'=> $this->faker->sentence,
+            'excerpt'=> $this->faker->paragraph(3),
             'body'=> $this->faker->paragraph(5),
         ];
     }

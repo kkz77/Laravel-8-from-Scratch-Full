@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         User::truncate();
         Category::truncate();
         Post::truncate();
-        Post::factory(20)->create();
+        Post::factory(40)->create();
         User::factory(3)->create();
-        Category::factory(5)->create();
+        Category::factory(20)->create();
     }
 }
