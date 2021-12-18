@@ -14,23 +14,7 @@
     <div class="flex justify-center space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
-            <x-dropdown>
-                <x-slot name="trigger">
-                    <button @click="open = !open"
-                            class="flex font-semibold w-32 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm text-left">
-                        {{isset($currentCategory)? $currentCategory->name: 'Categories'}}
-                        <x-icon name="dropdown"></x-icon>
-                    </button>
-                </x-slot>
-                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
-                @foreach($categories as $category)
-                    <x-dropdown-item href="/?category={{$category->slug}}"
-                    {{--isset($currentCategory)&& $currentCategory->is($category)--}}
-                                     :active="request()->is('?category='.$category->slug)">
-                                    {{$category->name}}
-                    </x-dropdown-item>
-                @endforeach
-            </x-dropdown>
+            <x-category-dropdown></x-category-dropdown>
         </div>
 
         <!-- Search -->
