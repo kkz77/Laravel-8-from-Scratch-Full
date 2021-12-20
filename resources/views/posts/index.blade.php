@@ -9,6 +9,7 @@
                     </x-post-card>
                 @endforeach
             </div>
+            {{ $posts->links() }}
         @else
             <p class="text-center">No posts yet!</p>
         @endif
