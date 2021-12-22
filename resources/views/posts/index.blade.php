@@ -13,6 +13,6 @@
         @else
             <p class="text-center">No posts yet!</p>
         @endif
-
     </main>
+    <x-flash></x-flash>
 </x-layout>
