@@ -24,7 +24,10 @@
                         </form>
                     </div>
                 @else
-                    <a href="/register" class="text-xs font-bold uppercase flex items-center">Register</a>
+                    <div class="flex items-center space-x-6">
+                        <a href="/login" class="text-sm font-bold uppercase flex items-center">LogIn</a>
+                        <a href="/register" class="text-sm font-bold uppercase flex items-center">Register</a>
+                    </div>
                 @endauth
                 <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
