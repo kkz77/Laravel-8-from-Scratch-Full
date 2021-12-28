@@ -53,27 +53,29 @@
                     <p>{{$post->body}}</p>
                 </div>
             </div>
-            <section class="col-start-5 col-span-8">
-                <div class="flex bg-gray-200 border border-gray-300 p-6 rounded-xl space-x-4">
+            <section class="col-start-5 col-span-8 flex flex-col space-y-4">
+                <div class="bg-gray-200 border border-gray-300 flex p-6 rounded-2xl space-x-4 items-start">
                     <div class="flex-shrink-0">
-                        <img src="https://i.pravatar.cc/60" width="60" height="60" alt="avatar"
+                        <img src="https://i.pravatar.cc/40?u={{auth()->id()}}" width="40" height="40" alt="avatar"
                              class="border border-gray-300 rounded-full">
                     </div>
-                    <div class="flex flex-col space-y-2">
-                        <div>
-                            <div class="font-bold">John Doe</div>
-                            <div class="text-xs">Posted <span class="font-semibold">8 hours ago</span></div>
-                        </div>
-                        <div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias
-                            consequatur
-                            culpa
-                            delectus et exercitationem, fuga ipsum iure labore nesciunt odit quasi rem
-                            veritatis
-                            voluptates.
-                        </div>
+                    <div class="flex flex-1 flex-col space-y-3">
+                        <div class="font-semibold text-lg">Want to Participate?</div>
+                        <form action="/#" method="POST">
+                            <textarea name="body" class="bg-gray-50 h-24 rounded-2xl w-11/12 p-4"></textarea>
+                            <div class="flex justify-end pt-3 px-10">
+                                <button class="bg-blue-500 justify-center px-4 py-2 rounded text-white hover:bg-blue-600">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
+                @if($post->comments->count())
+                    @foreach($post->comments as $comment)
+                        <x-comment :comment="$comment"></x-comment>
+                    @endforeach
+                @else
+                    <p class="text-gray-500 text-xl">No Comments Here... Be the first One!</p>
+                @endif
             </section>
         </article>
     </main>
