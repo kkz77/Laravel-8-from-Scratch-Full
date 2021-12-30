@@ -1,7 +1,7 @@
 @props(['comment'])
 <div class="flex bg-gray-200 border border-gray-300 p-6 rounded-xl space-x-4">
     <div class="flex-shrink-0">
-        <img src="https://i.pravatar.cc/60?u={{$comment->id}}" width="60" height="60" alt="avatar"
+        <img src="https://i.pravatar.cc/60?u={{$comment->user_id}}" width="60" height="60" alt="avatar"
              class="border border-gray-300 rounded-full">
     </div>
     <div class="flex flex-col space-y-4">

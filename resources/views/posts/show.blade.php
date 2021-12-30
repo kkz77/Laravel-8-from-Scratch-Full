@@ -56,21 +56,34 @@
             <section class="col-start-5 col-span-8 flex flex-col space-y-4">
                 <div class="bg-gray-200 border border-gray-300 flex p-6 rounded-2xl space-x-4 items-start">
                     <div class="flex-shrink-0">
-                        <img src="https://i.pravatar.cc/40?u={{auth()->id()}}" width="40" height="40" alt="avatar"
-                             class="border border-gray-300 rounded-full">
+                        @auth
+                            <img src="https://i.pravatar.cc/40?u={{auth()->id()}}" width="40" height="40" alt="avatar"
+                                 class="border border-gray-300 rounded-full">
+                        @endauth
                     </div>
                     <div class="flex flex-1 flex-col space-y-3">
                         <div class="font-semibold text-lg">Want to Participate?</div>
-                        <form action="/#" method="POST">
-                            <textarea name="body" class="bg-gray-50 h-24 rounded-2xl w-11/12 p-4"></textarea>
-                            <div class="flex justify-end pt-3 px-10">
-                                <button class="bg-blue-500 justify-center px-4 py-2 rounded text-white hover:bg-blue-600">Submit</button>
-                            </div>
-                        </form>
+                        @auth
+                            <form action="/posts/{{ $post->slug }}/comments" method="POST">
+                                @csrf
+                                <textarea name="body" class="bg-gray-50 h-24 rounded-2xl w-11/12 p-4"></textarea>
+                                <div class="flex justify-end pt-3 px-10">
+                                    <button class="bg-blue-500 justify-center px-4 py-2 rounded text-white hover:bg-blue-600">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        @else
+                            <p><a href="/login" class="text-blue-500">Login</a> or
+                                <a href="/register" class="text-blue-500">Register </a>to participate in comment
+                                                                                section!</p>
+                        @endauth
                     </div>
                 </div>
+
+
                 @if($post->comments->count())
-                    @foreach($post->comments as $comment)
+                    @foreach($post->comments->sortByDesc('created_at') as $comment)
                         <x-comment :comment="$comment"></x-comment>
                     @endforeach
                 @else
