@@ -7,6 +7,22 @@ use App\Http\Controllers\SessionController;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use MailchimpMarketing\ApiClient;
+
+Route::get('ping',function (){
+    $mailchimp = new ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => config('services.mailchimp.server')
+    ]);
+
+    $response = $mailchimp->lists->addListMember('01d51bce12',[
+        'email_address' => 'kkz@gmail.com',
+        'status' => 'subscribed'
+    ]);
+    ddd($response);
+});
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
