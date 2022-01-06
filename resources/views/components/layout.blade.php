@@ -65,7 +65,7 @@
                     </form>
                 </div>
                 @error('email')
-                <p class="text-red-500 text-xs">{{$message}}</p>
+                <p class="bg-gray-50 font-semibold mt-3 p-2 rounded text-red-500 text-xs">{{$message}}</p>
                 @enderror
             </div>
         </footer>
