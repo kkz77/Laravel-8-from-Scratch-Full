@@ -53,7 +53,7 @@
                     <p>{{$post->body}}</p>
                 </div>
             </div>
-            <section class="col-start-5 col-span-8 flex flex-col space-y-4">
+            <section class="col-start-5 col-span-8 flex flex-col space-y-4 mt-10">
                 <div class="bg-gray-200 border border-gray-300 flex p-6 rounded-2xl space-x-4 items-start">
                     <div class="flex-shrink-0">
                         @auth

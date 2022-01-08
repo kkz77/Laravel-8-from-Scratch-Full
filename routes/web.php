@@ -14,6 +14,7 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts');
 Route::post('posts/{post:slug}/comments', [CommentController::class, 'store'])->middleware('auth');
 Route::get('admin/posts/create',[PostController::class,'create'])->middleware('is_admin');
+Route::post('admin/posts',[PostController::class,'store'])->middleware('is_admin');
 
 Route::get(
     'authors/{author:username}',
