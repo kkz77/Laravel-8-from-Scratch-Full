@@ -1,11 +1,12 @@
 <x-layout>
     <div class="border border-gray-200 bg-gray-100 max-w-lg mt-10 mx-auto rounded-lg">
-        <form action="/admin/posts" method="post">
+        <form action="/admin/posts" method="post" enctype="multipart/form-data">
             @csrf
             <div class="text-xl font-semibold text-center mt-4">Create Post</div>
             <div class="items-center justify-center mx-auto my-6 w-72 flex flex-col space-y-4">
                 <input type="text" name="title" class="h-8  p-2 rounded-lg w-full" placeholder="Title" required value="{{old('title')}}">
                 <input type="text" name="slug" class="h-8  p-2 rounded-lg w-full" placeholder="Slug" required value="{{old('slug')}}">
+                <input type="file" name="thumbnail" class="w-full">
                 <textarea name="excerpt" id="excerpt" class="w-full rounded-lg p-2" placeholder="Excerpt"
                                        value="{{old('excerpt')}}"
                           required></textarea>

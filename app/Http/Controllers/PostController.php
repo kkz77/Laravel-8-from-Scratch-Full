@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
+        $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString();
 
         return view(
             'posts.index',
@@ -28,8 +28,8 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(){
-        $attributes = request()->validate([
+    public function store(Request $request){
+        $attributes = $request->validate([
             'title' => 'required',
             'excerpt' => 'required',
             'slug' => ['required',Rule::unique('posts','slug')],
@@ -38,6 +38,7 @@ class PostController extends Controller
         ]);
 
         $attributes['user_id'] = auth()->id();
+        $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
         Post::create($attributes);
         return redirect('/')->with('success','Post Created');
     }
