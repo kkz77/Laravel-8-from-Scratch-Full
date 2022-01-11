@@ -1,4 +1,4 @@
-@props(['active'])
+@props(['active'=>'false'])
 @php
     $class="hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white text-left px-2";
         if(!empty($active)){

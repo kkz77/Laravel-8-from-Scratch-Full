@@ -1,9 +1,8 @@
-<x-layout>
-    <div class="border border-gray-200 bg-gray-100 max-w-lg mt-10 mx-auto rounded-lg">
-        <form action="/admin/posts" method="post" enctype="multipart/form-data">
+<x-setting>
+    <x-slot name="form">
+        <form action="/admin/posts" method="post" enctype="multipart/form-data" class="w-full mx-auto">
             @csrf
-            <div class="text-xl font-semibold text-center mt-4">Create Post</div>
-            <div class="items-center justify-center mx-auto my-6 w-72 flex flex-col space-y-4">
+            <div class="items-center justify-center my-6 flex flex-col space-y-4 p-6">
                 <x-form.input name="title"></x-form.input>
                 <x-form.input name="slug"></x-form.input>
                 <x-form.input name="thumbnail" type="file"></x-form.input>
@@ -14,8 +13,10 @@
                         <option value="{{$category->id}}" {{ old('category_id') == $category->id ? "selected" : ""}}>{{$category->name}}</option>
                     @endforeach
                 </select>
-                <x-submit-button class="w-full rounded-full">Post</x-submit-button>
+            </div>
+            <div class="flex justify-center mb-6">
+                <x-submit-button class="flex w-32 rounded-full">Post</x-submit-button>
             </div>
         </form>
-    </div>
-</x-layout>
+    </x-slot>
+</x-setting>

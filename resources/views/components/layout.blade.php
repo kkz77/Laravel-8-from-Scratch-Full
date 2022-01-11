@@ -5,6 +5,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.7.1/dist/cdn.min.js"></script>
+
 <body style="font-family: Open Sans, sans-serif; scroll-behavior: smooth">
     <section class="px-6 py-8">
         <nav class="md:flex md:justify-between md:items-center">
@@ -17,11 +19,17 @@
             <div class="mt-8 md:mt-0 flex">
                 @auth
                     <div class="flex items-center font-semibold space-x-6">
-                        <p class="bg-green-500 rounded-3xl px-4 py-2 text-white">Welcome , {{auth()->user()->name}}</p>
-                        <form action="/logout" method="POST" class="flex">
-                            @csrf
-                            <button type="submit">Logout</button>
-                        </form>
+                        <x-dropdown>
+                            <x-slot name="trigger">
+                                <button class="bg-green-500 rounded-3xl px-4 py-2 text-white" @click="open=!open">Welcome , {{auth()->user()->name}}</button>
+                            </x-slot>
+                            <x-dropdown-item href="/admin/dashboard" :active="request()->routeIs('dashboard')" >Dashboard </x-dropdown-item>
+                            <x-dropdown-item href="/admin/posts/create" :active="request()->routeIs('create-posts')">Create Post</x-dropdown-item>
+                            <button type="submit"  class="flex px-2.5 font-semibold hover:bg-blue-500 hover:text-white" form="myform" >Logout</button>
+                            <form id="myform" action="/logout" method="POST" class="hidden" >
+                                @csrf
+                            </form>
+                        </x-dropdown>
                     </div>
                 @else
                     <div class="flex items-center space-x-6">

@@ -13,15 +13,16 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts');
 Route::post('posts/{post:slug}/comments', [CommentController::class, 'store'])->middleware('auth');
-Route::get('admin/posts/create',[PostController::class,'create'])->middleware('is_admin');
-Route::post('admin/posts',[PostController::class,'store'])->middleware('is_admin');
-
+Route::get('admin/posts/create', [PostController::class, 'create'])->middleware('is_admin')->name('create-posts');
+Route::post('admin/posts', [PostController::class, 'store'])->middleware('is_admin');
 Route::get(
-    'authors/{author:username}',
-    function (User $author) {
-        return view('posts', ['posts' => $author->posts]);
+    'admin/dashboard',
+    function () {
+        return view('admin.dashboard');
     }
-)->name('authors');
+)->middleware('is_admin')->name('dashboard');
+
+Route::get('authors/{author:username}', [PostController::class, 'author'])->name('authors');
 
 
 Route::post('newsletter', ServiceController::class);
