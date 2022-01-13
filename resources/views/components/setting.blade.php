@@ -1,7 +1,7 @@
 <x-layout>
     <x-panel>
         <div class="flex">
-            <aside class="w-72 rounded-lg bg-gray-50 shadow-md">
+            <aside class="w-72 rounded-lg bg-gray-50 shadow-md flex-shrink-0">
                 <ul class="py-8 flex flex-col space-y-8 font-semibold text-gray-400">
                     <li><a href="/admin/dashboard"
                            class="hover:text-black flex justify-center  {{ request()->routeIs('dashboard') ? 'text-black border-b border-white':''}}">Dashboard</a>
@@ -18,6 +18,7 @@
                     {{$form}}
                 @endif
                 {{$dashboard??''}}
+                {{$slot}}
             </div>
         </div>
     </x-panel>
